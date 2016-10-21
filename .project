@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/GUI/fecha.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Pictures/fecha.png</locationURI>
-		</link>
-		<link>
-			<name>src/GUI/foto.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Pictures/foto.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
