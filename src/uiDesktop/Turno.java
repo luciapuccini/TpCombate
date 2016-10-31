@@ -1,4 +1,4 @@
-package logica;
+package uiDesktop;
 
 import java.awt.EventQueue;
 /**/
@@ -11,37 +11,46 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+
+import datos.Tabla;
+import entidades.Personaje;
+import logica.Controlador;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class Turno extends JFrame {
+public class Turno extends JFrame 
+{
 
 	private JPanel contentPane;
-	
-	private JTextField txtEnergiaAtaque1;
-	private JTextField txtEnergiaAtaque2;
+	private JTextField txtEnergia1;
+	private JTextField txtEnergia2;
 	private JTextField txtEnergiaDisponible1;
 	private JTextField txtVidaActual1;
 	private JTextField txtVidaActual2;
 	private JTextField txtEnergiaDisponible2;
-	private JTextField textField;
+	private JTextField txtP1;
+	private JTextField txtP2;
 
+	Personaje p1=new Personaje();
+	Personaje p2=new Personaje();
+	
 	
 	public JTextField getTxtEnergiaAtaque1() {
-		return txtEnergiaAtaque1;
+		return txtEnergia1;
 	}
 
 	public void setTxtEnergiaAtaque1(JTextField txtEnergiaAtaque1) {
-		this.txtEnergiaAtaque1 = txtEnergiaAtaque1;
+		this.txtEnergia1 = txtEnergiaAtaque1;
 	}
 
 	public JTextField getTxtEnergiaAtaque2() {
-		return txtEnergiaAtaque2;
+		return txtEnergia2;
 	}
 
 	public void setTxtEnergiaAtaque2(JTextField txtEnergiaAtaque2) {
-		this.txtEnergiaAtaque2 = txtEnergiaAtaque2;
+		this.txtEnergia2 = txtEnergiaAtaque2;
 	}
 
 	public JTextField getTxtEnergiaDisponible1() {
@@ -132,27 +141,28 @@ public class Turno extends JFrame {
 		
 		JLabel lblEnergiaAtaque1 = new JLabel("Ingrese Energia: ");
 		
-		txtEnergiaAtaque1 = new JTextField();
-		txtEnergiaAtaque1.addActionListener(new ActionListener() 
+		txtEnergia1 = new JTextField();
+		txtEnergia1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				int a=Integer.parseInt(txtEnergiaAtaque1.getText());
+				int a=Integer.parseInt(txtEnergia1.getText());
 				//actualiza energia
-			//	Controlador.ataque(a);
+				Controlador controlaAtaque = new Controlador();
+			//	controlaAtaque.ataque(a);
 				
 			}
 		});
-		txtEnergiaAtaque1.setColumns(10);
+		txtEnergia1.setColumns(10);
 		
-		txtEnergiaAtaque2 = new JTextField();
-		txtEnergiaAtaque2.addActionListener(new ActionListener() 
+		txtEnergia2 = new JTextField();
+		txtEnergia2.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
 			}
 		});
-		txtEnergiaAtaque2.setColumns(10);
+		txtEnergia2.setColumns(10);
 		
 		JLabel lblEnergiaAtaque2 = new JLabel("Ingrese Energia:");
 		
@@ -212,16 +222,33 @@ public class Turno extends JFrame {
 			}
 		});
 		
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
+		txtP1 = new JTextField();
+		txtP1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				Controlador controladorNombre= new Controlador();
-				//falta agregar el nombre elegido
+				//Controlador controladorNombre= new Controlador();
+				
+				//Personaje	per =controladorNombre.getPerso();
+				Personaje per= new Tabla().getPer1();
+				txtP1.setText(per.getNombre());
+				
 				
 			}
 		});
-		textField.setColumns(10);
+		txtP1.setColumns(10);
+		
+		txtP2 = new JTextField();
+		txtP2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				Tabla a= new Tabla();
+				Personaje per = a.getPer2();
+				
+				txtP2.setText(per.getNombre());
+				
+			}
+		});
+		txtP2.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -234,11 +261,11 @@ public class Turno extends JFrame {
 							.addComponent(btnDefensa1)
 							.addContainerGap(262, Short.MAX_VALUE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblP1)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addComponent(txtP1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblVida1)
 									.addGap(18)
@@ -250,19 +277,21 @@ public class Turno extends JFrame {
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblEnergiaAtaque1)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(txtEnergiaAtaque1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtEnergia1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)))
 							.addGap(53)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblP2)
-									.addGap(126))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtP2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(50))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(lblEnergiaAtaque2)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtEnergiaAtaque2, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+											.addComponent(txtEnergia2, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(btnAtaque2)
 											.addGap(18)
@@ -283,9 +312,10 @@ public class Turno extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblP2)
 						.addComponent(lblP1)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtP1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblP2)
+						.addComponent(txtP2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(44)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVida2)
@@ -303,9 +333,9 @@ public class Turno extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblEnergiaAtaque1)
 						.addComponent(lblEnergiaAtaque2)
-						.addComponent(txtEnergiaAtaque1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtEnergiaAtaque2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+						.addComponent(txtEnergia1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtEnergia2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnDefensa1)
 						.addComponent(btnAtaque1)

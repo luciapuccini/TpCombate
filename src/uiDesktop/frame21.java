@@ -1,4 +1,4 @@
-package logica;
+package uiDesktop;
 
 import java.awt.EventQueue;
 

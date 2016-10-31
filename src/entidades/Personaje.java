@@ -1,4 +1,8 @@
-package logica;
+package entidades;
+
+import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 public class Personaje 
 	{
@@ -47,13 +51,26 @@ public class Personaje
 		this.nombre = nombre;
 	}
 	
-	public void recibirAtaque()
+	public void recibirAtaque(int valorAtaque)
 	{
-		//actualiza vida
+		Random numAleatorio= new Random();
+		if ((numAleatorio.nextInt()*100) < this.getEvasion())
+		{
+			this.setVida(this.getVida()-valorAtaque);
+			if(this.getVida()== 0)
+			{
+				JOptionPane.showMessageDialog(null, "Perdio");
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "SE EVADIO EL ATAQUE");
+		}
 	};
-	public int atacar(int valorAtaque)
+	public int atacar(int valorAtaque,Personaje pAtacado)
 	{
-		
+		this.setEnergia(this.getEnergia()-valorAtaque);
+		pAtacado.recibirAtaque(valorAtaque);
 		return 0;
 	};
 	

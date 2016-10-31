@@ -1,10 +1,11 @@
-package logica;
+package uiDesktop;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -15,12 +16,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.jgoodies.forms.factories.*;
+import org.apache.log4j.BasicConfigurator;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 
 
 @SuppressWarnings("serial")
-public class juego1 extends JFrame 
+public class juego extends JFrame 
 {
 	
 
@@ -34,19 +37,21 @@ public class juego1 extends JFrame
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					juego1 frame = new juego1();
+					juego frame = new juego();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		//LOGGER CONFIG
+		BasicConfigurator.configure();
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public juego1() 
+	public juego() 
 	{
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\lucia\\Pictures\\foto.png"));
 		setTitle("Turned Based Combat !");
@@ -94,7 +99,7 @@ public class juego1 extends JFrame
 		
 		
 		JLabel lblTurnedBasedCombat = DefaultComponentFactory.getInstance().createTitle("");
-		lblTurnedBasedCombat.setIcon(new ImageIcon(juego1.class.getResource("/GUI/PersonajesTBC/cooltext206674046505259.png")));
+		lblTurnedBasedCombat.setIcon(new ImageIcon(juego.class.getResource("/PersonajesTBC/cooltext206674046505259.png")));
 		lblTurnedBasedCombat.setForeground(Color.ORANGE);
 		lblTurnedBasedCombat.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

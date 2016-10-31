@@ -1,8 +1,8 @@
-package logica;
+package uiDesktop;
 import java.util.ArrayList;
 
-import logica.Personaje;
-import datos.MyDataAcces1;
+import datos.MyDataAccess;
+import entidades.Personaje;
 
 @SuppressWarnings("unused")
 	public class LogicPersonaje 

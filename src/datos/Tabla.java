@@ -12,6 +12,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,13 +20,14 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import entidades.Personaje;
 import logica.Controlador;
-import logica.Turno;
+import uiDesktop.Turno;
 
-public class Tabla extends JFrame{
+public class Tabla extends JFrame
+{
     
     static String  nombrePersonaje = new String();
-
 
      
     public static String getNombrePersonaje() {
@@ -45,8 +47,27 @@ public class Tabla extends JFrame{
     JScrollPane desplazamiento = null;
     private JTextField txtP1;
     private JTextField txtP2;
-    
-    /**
+    	Personaje per1= new Personaje();
+    	Personaje per2= new Personaje();
+    	
+    	
+    public Personaje getPer1() {
+			return per1;
+		}
+
+		public void setPer1(Personaje p1) {
+			this.per1 = p1;
+		}
+
+		public Personaje getPer2() {
+			return per2;
+		}
+
+		public void setPer2(Personaje p2) {
+			per2 = p2;
+		}
+
+	/**
      * Obtenemos todos los datos de la tabla juegos;
      * @throws ClassNotFoundException 
      * @throws SQLException 
@@ -130,7 +151,8 @@ public class Tabla extends JFrame{
         	String nombrePersonaje = txtP1.getText();
     		
         	Controlador controladorBusca = new Controlador();
-    			controladorBusca.buscarPersonaje(nombrePersonaje);  
+    		per1=controladorBusca.buscaPersonaje(nombrePersonaje);
+    		JOptionPane.showMessageDialog(null, "encontre:"+per1.getNombre());
         	}
         });
         
@@ -139,7 +161,9 @@ public class Tabla extends JFrame{
         	public void actionPerformed(ActionEvent e) 
         	{	String nombrePersonaje = txtP2.getText();
         	Controlador controladorBusca = new Controlador();
-			controladorBusca.buscarPersonaje(nombrePersonaje);  
+		
+        	per2=controladorBusca.buscaPersonaje(nombrePersonaje);  
+        	setPer2(per2);
         	}
         });
         
