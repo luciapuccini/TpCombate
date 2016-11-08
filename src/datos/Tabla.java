@@ -26,18 +26,6 @@ import uiDesktop.Turno;
 
 public class Tabla extends JFrame
 {
-    
-    static String  nombrePersonaje = new String();
-
-     
-    public static String getNombrePersonaje() {
-		return nombrePersonaje;
-	}
-
-	public static void setNombrePersonaje(String nombrePersonaje) {
-		Tabla.nombrePersonaje = nombrePersonaje;
-	}
-
 	private static final long serialVersionUID = 210601883990408438L;
     private Connection conexion = null;
     private Statement comando = null;
@@ -47,8 +35,10 @@ public class Tabla extends JFrame
     JScrollPane desplazamiento = null;
     private JTextField txtP1;
     private JTextField txtP2;
-    	Personaje per1= new Personaje();
-    	Personaje per2= new Personaje();
+    
+    
+   	Personaje per1= new Personaje();
+   	Personaje per2= new Personaje();
     	
     	
     public Personaje getPer1() {
@@ -62,16 +52,10 @@ public class Tabla extends JFrame
 		public Personaje getPer2() {
 			return per2;
 		}
-
 		public void setPer2(Personaje p2) {
 			per2 = p2;
 		}
 
-	/**
-     * Obtenemos todos los datos de la tabla juegos;
-     * @throws ClassNotFoundException 
-     * @throws SQLException 
-     */
     private void leerDatos() throws ClassNotFoundException, SQLException 
     {
         String usuario = "root";
@@ -96,9 +80,10 @@ public class Tabla extends JFrame
     {
         conexion.close();        
     }    
-    
+    Controlador controladorBusca = new Controlador();
     public Tabla() 
     {
+    	
         // Nombre de las columnas como apareceran en la tabla
         String[] columnas = { "nombre", "energia","vida","defensa","evasion","puntos_totales"};
         tabla = new JTable();
@@ -137,9 +122,7 @@ public class Tabla extends JFrame
         txtP1.addActionListener(new ActionListener() 
         {
         	public void actionPerformed(ActionEvent e) 
-        	{
-        		
-        		  	     
+        	{  	     
           	}
         });
         txtP1.setColumns(10);
@@ -149,10 +132,12 @@ public class Tabla extends JFrame
         	public void actionPerformed(ActionEvent arg0) 
         	{
         	String nombrePersonaje = txtP1.getText();
-    		
-        	Controlador controladorBusca = new Controlador();
+        	
     		per1=controladorBusca.buscaPersonaje(nombrePersonaje);
     		JOptionPane.showMessageDialog(null, "encontre:"+per1.getNombre());
+    		controladorBusca.setP1(per1);
+    	
+		
         	}
         });
         
@@ -160,10 +145,12 @@ public class Tabla extends JFrame
         btnPersonaje2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) 
         	{	String nombrePersonaje = txtP2.getText();
-        	Controlador controladorBusca = new Controlador();
-		
+        	
         	per2=controladorBusca.buscaPersonaje(nombrePersonaje);  
-        	setPer2(per2);
+    		JOptionPane.showMessageDialog(null, "encontre:"+per2.getNombre());
+    		controladorBusca.setP2(per2);
+		
+        	
         	}
         });
         

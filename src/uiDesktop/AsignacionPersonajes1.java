@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import datos.MyDataAccess;
 import entidades.Personaje;
 import logica.Controlador;
+import utils.ApplicationException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -169,7 +170,12 @@ public class AsignacionPersonajes1 extends JFrame
 				//faltaria validar que los campos no esten vacios en controlador...
 				System.out.println("insertando nuevo registro...");
 				Controlador ctrl = new Controlador();
-				ctrl.insertarPersonaje(p);				
+				try {
+					ctrl.insertarPersonaje(p);
+				} catch (ApplicationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
 				
 				}
 				else

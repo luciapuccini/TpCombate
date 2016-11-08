@@ -7,6 +7,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -32,10 +33,12 @@ public class Turno extends JFrame
 	private JTextField txtEnergiaDisponible2;
 	private JTextField txtP1;
 	private JTextField txtP2;
-
-	Personaje p1=new Personaje();
-	Personaje p2=new Personaje();
+	Controlador c= new Controlador();
 	
+	
+	
+	Personaje p1= c.damePersonaje1();
+	Personaje p2= c.damePersonaje2();
 	
 	public JTextField getTxtEnergiaAtaque1() {
 		return txtEnergia1;
@@ -89,6 +92,8 @@ public class Turno extends JFrame
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -105,6 +110,7 @@ public class Turno extends JFrame
 	 * Create the frame.
 	 */
 	public Turno() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -148,7 +154,7 @@ public class Turno extends JFrame
 			{
 				int a=Integer.parseInt(txtEnergia1.getText());
 				//actualiza energia
-				Controlador controlaAtaque = new Controlador();
+	
 			//	controlaAtaque.ataque(a);
 				
 			}
@@ -219,33 +225,28 @@ public class Turno extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				System.out.println(""+p1.getNombre());
 			}
 		});
-		
+	
+				
 		txtP1 = new JTextField();
+		txtP1.setEditable(false);
 		txtP1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				//Controlador controladorNombre= new Controlador();
-				
-				//Personaje	per =controladorNombre.getPerso();
-				Personaje per= new Tabla().getPer1();
-				txtP1.setText(per.getNombre());
-				
-				
+				System.out.println(p1.getNombre());
+			
 			}
 		});
 		txtP1.setColumns(10);
-		
+		txtP1.setText("holis");
 		txtP2 = new JTextField();
 		txtP2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				Tabla a= new Tabla();
-				Personaje per = a.getPer2();
-				
-				txtP2.setText(per.getNombre());
-				
+			
+			
 			}
 		});
 		txtP2.setColumns(10);

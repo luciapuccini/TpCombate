@@ -1,36 +1,45 @@
 package logica;
 
-import java.util.ArrayList;
-
 import datos.DataPersonaje;
 import entidades.Personaje;
 import utils.ApplicationException;
 
 public class Controlador 
 {
-private ArrayList<Personaje> Personajes;
+
 	
 	private datos.DataPersonaje dataPer;
+	private Personaje p1= new Personaje() ;
+	private Personaje p2 =new Personaje();
 	
 	
 	public Controlador()
 	{
-		Personajes = new ArrayList<Personaje>();
 		dataPer=new DataPersonaje();
 	};
 	
-	public void add(Personaje p) throws ApplicationException {
+	/*public void add(Personaje p) throws ApplicationException {
 		dataPer.add(p);
 		
-		if(!Personajes.contains(p)){
-			Personajes.add(p);
+		if(!personajes.contains(p)){
+			personajes.add(p);
 		} else {
-			throw new ApplicationException("La Personajeje ya existe");
-		}
-	}
+			throw new ApplicationException("La Persona ya existe");
+		}}
+	}*/
+
 	
+	public void setP1(Personaje p1) {
+		this.p1 = p1;
+	
+	}
+
+	public void setP2(Personaje p2) {
+		this.p2 = p2;
+	}
+
 	public void update(Personaje p) throws ApplicationException{
-		if(Personajes.contains(p))
+		if( p1==p || p2==p )
 		{
 			Personaje perEnc=this.getPersonaje(p);
 			
@@ -72,10 +81,20 @@ public Personaje buscaPersonaje(String nomb)
 	{
 		Personaje p;
 		p=dataPer.getByNombre(nomb);
+	
 		return p;
 	}
 
-public void insertarPersonaje(Personaje pnew)
+public Personaje damePersonaje1(){
+System.out.println(p1.getNombre());
+	return this.p1;
+	
+}
+
+public Personaje damePersonaje2(){
+	return this.p2;
+}
+public void insertarPersonaje(Personaje pnew)throws ApplicationException
 	{
 		if(pnew.getNombre() != null)  //COMPLETAR IFS ANIDADOS
 			

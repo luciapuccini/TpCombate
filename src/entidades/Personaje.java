@@ -12,7 +12,7 @@ public class Personaje
 	 int vida;
 	 int defensa;
 	 int puntos;
-	 String nombre = new String();
+	 String nombre;
 //----------getters y setters----------------------//	
 	public  int getEnergia() {
 		return energia;
@@ -50,6 +50,9 @@ public class Personaje
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+
+	
 	
 	public void recibirAtaque(int valorAtaque)
 	{
