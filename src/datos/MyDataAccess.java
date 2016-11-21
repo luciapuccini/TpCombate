@@ -1,6 +1,8 @@
 package datos;
 
 import java.sql.*;
+
+import logica.Controlador;
 import utils.*;
 
 public class MyDataAccess {
@@ -18,7 +20,7 @@ public class MyDataAccess {
 	private Connection conn;
 	private int cantConn=0;
 	
-	private MyDataAccess() throws ApplicationException
+	public MyDataAccess() throws ApplicationException
 	{
 		try {
 			Class.forName(dbDriver);

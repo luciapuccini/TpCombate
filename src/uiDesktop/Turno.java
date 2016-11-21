@@ -1,24 +1,22 @@
 package uiDesktop;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**/
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import datos.Tabla;
 import entidades.Personaje;
 import logica.Controlador;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class Turno extends JFrame 
@@ -33,13 +31,41 @@ public class Turno extends JFrame
 	private JTextField txtEnergiaDisponible2;
 	private JTextField txtP1;
 	private JTextField txtP2;
-	Controlador c= new Controlador();
+	
+	Controlador ctrl;
+
+	public Controlador getCtrl() 
+	{
+		return ctrl;
+	}
+
+	public void setCtrl(Controlador ctrl) 
+	{
+		this.ctrl = ctrl;
+	}
+
+	Personaje p1;
+	Personaje p2;
 	
 	
-	
-	Personaje p1= c.damePersonaje1();
-	Personaje p2= c.damePersonaje2();
-	
+	public Personaje getP1()
+	{
+		return p1;
+	}
+
+	public void setP1(Personaje p1) 
+	{
+		this.p1 = p1;
+	}
+
+	public Personaje getP2() {
+		return p2;
+	}
+
+	public void setP2(Personaje p2) {
+		this.p2 = p2;
+	}
+
 	public JTextField getTxtEnergiaAtaque1() {
 		return txtEnergia1;
 	}
@@ -88,17 +114,16 @@ public class Turno extends JFrame
 		this.txtEnergiaDisponible2 = txtEnergiaDisponible2;
 	}
 
-	/**
-	 * Launch the application.
-	 */
+	
+	
 	public static void main(String[] args) {
 		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Turno frame = new Turno();
-					frame.setVisible(true);
+					//Turno frame = new Turno();
+					//frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -109,8 +134,23 @@ public class Turno extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public Turno() {
+/**	public Turno(Controlador c)
+*	{
+*		this.setCtrl(c);
+*		p1=c.dameUno();
+*		p2=c.dameDos();
+*		this.setP2(c.getP2());
+*		System.out.println("llego al turno: "+	c.getP1().getNombre());	
+*	} */
+	
+	public Turno(Controlador c) {
 		
+		this.setCtrl(c);
+		p1=c.dameUno();
+		p2=c.dameDos();
+		this.setP2(c.getP2());
+		System.out.println("llego al turno: "+	c.getP1().getNombre());
+		//----------------------inicializo--------------------------------------
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -121,11 +161,15 @@ public class Turno extends JFrame
 		
 		JLabel lblP2 = new JLabel("Personaje 2:");
 		
+
+		//-----------juego p1------------------//
+		
 		JButton btnAtaque1 = new JButton("Ataque");
 		btnAtaque1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				p1.atacar(Integer.parseInt(txtEnergia1.getText()), p2);
 			}
 		});
 		
@@ -136,6 +180,25 @@ public class Turno extends JFrame
 			{
 			}
 		});
+		//-------------------juego p2-------------------------
+		JButton btnAtaque2 = new JButton("Ataque");
+		btnAtaque2.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				p2.atacar(Integer.parseInt(txtEnergia2.getText()), p1);
+			}
+		});
+		
+		JButton btnDefensa2 = new JButton("Defensa");
+		btnDefensa2.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.println(""+p1.getNombre());
+			}
+		});
+//----------------------labels------------------------------------------------------------------------------
 		
 		JLabel lblVida1 = new JLabel("Vida Actual:");
 		
@@ -173,6 +236,7 @@ public class Turno extends JFrame
 		JLabel lblEnergiaAtaque2 = new JLabel("Ingrese Energia:");
 		
 		txtEnergiaDisponible1 = new JTextField();
+		txtEnergiaDisponible1.setText(String.valueOf(p1.getEnergia()));
 		txtEnergiaDisponible1.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -181,8 +245,9 @@ public class Turno extends JFrame
 		});
 		txtEnergiaDisponible1.setEditable(false);
 		txtEnergiaDisponible1.setColumns(10);
-		
+		//-------------------vida1-----------------------
 		txtVidaActual1 = new JTextField();
+		txtVidaActual1.setText(String.valueOf(p1.getVida()));
 		txtVidaActual1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -191,8 +256,9 @@ public class Turno extends JFrame
 		});
 		txtVidaActual1.setEditable(false);
 		txtVidaActual1.setColumns(10);
-		
+		//-------------------vida2-----------------------
 		txtVidaActual2 = new JTextField();
+		txtVidaActual2.setText(String.valueOf(p2.getVida()));
 		txtVidaActual2.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -203,6 +269,7 @@ public class Turno extends JFrame
 		txtVidaActual2.setColumns(10);
 		
 		txtEnergiaDisponible2 = new JTextField();
+		txtEnergiaDisponible2.setText(String.valueOf(p2.getEnergia()));
 		txtEnergiaDisponible2.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -212,44 +279,30 @@ public class Turno extends JFrame
 		txtEnergiaDisponible2.setEditable(false);
 		txtEnergiaDisponible2.setColumns(10);
 		
-		JButton btnAtaque2 = new JButton("Ataque");
-		btnAtaque2.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-			}
-		});
 		
-		JButton btnDefensa2 = new JButton("Defensa");
-		btnDefensa2.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				System.out.println(""+p1.getNombre());
-			}
-		});
 	
-				
+		//---------------------P1--------------------		
 		txtP1 = new JTextField();
 		txtP1.setEditable(false);
 		txtP1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(p1.getNombre());
-			
 			}
 		});
 		txtP1.setColumns(10);
-		txtP1.setText("holis");
+		txtP1.setText(p1.getNombre());
+		//---------------------P2--------------------
 		txtP2 = new JTextField();
-		txtP2.addActionListener(new ActionListener() {
+		txtP2.setEditable(false);
+		txtP2.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-			
-			
 			}
 		});
 		txtP2.setColumns(10);
+		txtP2.setText(p2.getNombre());
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

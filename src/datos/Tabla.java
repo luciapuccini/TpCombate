@@ -37,25 +37,29 @@ public class Tabla extends JFrame
     private JTextField txtP2;
     
     
-   	Personaje per1= new Personaje();
-   	Personaje per2= new Personaje();
+   	Personaje p1= new Personaje();
+   	Personaje p2= new Personaje();
+     Controlador ctrlBusca= new Controlador(); 
     	
-    	
-    public Personaje getPer1() {
-			return per1;
+   		public Personaje getP1() 
+   		{
+			return p1;
 		}
 
-		public void setPer1(Personaje p1) {
-			this.per1 = p1;
+		public void setP1(Personaje p1) 
+		{
+			this.p1 = p1;
+		}
+		public Personaje getP2()
+ {
+			return p2;
+		}
+		public void setP2(Personaje p2) 
+{
+			this.p2 = p2;
 		}
 
-		public Personaje getPer2() {
-			return per2;
-		}
-		public void setPer2(Personaje p2) {
-			per2 = p2;
-		}
-
+		
     private void leerDatos() throws ClassNotFoundException, SQLException 
     {
         String usuario = "root";
@@ -80,7 +84,13 @@ public class Tabla extends JFrame
     {
         conexion.close();        
     }    
-    Controlador controladorBusca = new Controlador();
+    //
+    //
+   
+    	
+    
+    
+    
     public Tabla() 
     {
     	
@@ -128,14 +138,15 @@ public class Tabla extends JFrame
         txtP1.setColumns(10);
         
         JButton btnPersonaje1 = new JButton("Personaje 1");
-        btnPersonaje1.addActionListener(new ActionListener() {
+        btnPersonaje1.addActionListener(new ActionListener() 
+        {
         	public void actionPerformed(ActionEvent arg0) 
         	{
         	String nombrePersonaje = txtP1.getText();
-        	
-    		per1=controladorBusca.buscaPersonaje(nombrePersonaje);
-    		JOptionPane.showMessageDialog(null, "encontre:"+per1.getNombre());
-    		controladorBusca.setP1(per1);
+    		p1=ctrlBusca.buscaPersonaje(nombrePersonaje);//setP1(p1);
+    		ctrlBusca.setP1(p1);
+    		JOptionPane.showMessageDialog(null, "encontre: "+p1.getNombre());
+    		
     	
 		
         	}
@@ -144,11 +155,12 @@ public class Tabla extends JFrame
         JButton btnPersonaje2 = new JButton("Personaje2");
         btnPersonaje2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) 
-        	{	String nombrePersonaje = txtP2.getText();
-        	
-        	per2=controladorBusca.buscaPersonaje(nombrePersonaje);  
-    		JOptionPane.showMessageDialog(null, "encontre:"+per2.getNombre());
-    		controladorBusca.setP2(per2);
+        	{	
+        	String nombrePersonaje = txtP2.getText();
+        	p2=ctrlBusca.buscaPersonaje(nombrePersonaje);  //this.setP2(p2);
+        	ctrlBusca.setP2(p2);
+    		JOptionPane.showMessageDialog(null, "encontre: "+p2.getNombre());
+    		
 		
         	
         	}
@@ -166,7 +178,9 @@ public class Tabla extends JFrame
         button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e)
         	{
-        		Turno.main(null);
+        			Turno t= new Turno(ctrlBusca);
+        			t.setVisible(true);
+        			
         	}
         });
         GroupLayout gl_panel = new GroupLayout(panel);

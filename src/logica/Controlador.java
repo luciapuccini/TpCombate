@@ -1,21 +1,41 @@
 package logica;
 
 import datos.DataPersonaje;
+import datos.Tabla;
 import entidades.Personaje;
 import utils.ApplicationException;
 
 public class Controlador 
 {
 
+	Personaje p1;
+	Personaje p2;
 	
-	private datos.DataPersonaje dataPer;
-	private Personaje p1= new Personaje() ;
-	private Personaje p2 =new Personaje();
+	public Personaje getP1() {
+		return p1;
+	}
+
+	public void setP1(Personaje p1) {
+		this.p1 = p1;
+	}
+
+	public Personaje getP2() {
+		return p2;
+	}
+
+	public void setP2(Personaje p2) {
+		this.p2 = p2;
+	}
+
+	//private datos.DataPersonaje dataPer;
+	private DataPersonaje dataPer=new DataPersonaje();
+	
+	
+	
 	
 	
 	public Controlador()
 	{
-		dataPer=new DataPersonaje();
 	};
 	
 	/*public void add(Personaje p) throws ApplicationException {
@@ -27,18 +47,33 @@ public class Controlador
 			throw new ApplicationException("La Persona ya existe");
 		}}
 	}*/
-
 	
-	public void setP1(Personaje p1) {
-		this.p1 = p1;
+	public Personaje dameUno()
+	{
 	
+		Personaje p=this.getP1();
+		System.out.println("ctrl llega: "+ p.getNombre());
+		
+		return p;
 	}
-
-	public void setP2(Personaje p2) {
-		this.p2 = p2;
+	public Personaje dameDos()
+	{
+		Personaje p=this.getP2();
+		System.out.println("ctrl llega: "+ p.getNombre());
+		
+		return p;
 	}
+	
+/*	public Personaje dameDos()
+	{
+		Personaje p=data.getP2();
+		System.out.println("ctrl llega: "+ p.getNombre());
+		return p;
+	}*/
+	
 
-	public void update(Personaje p) throws ApplicationException{
+/*	public void update(Personaje p) throws ApplicationException  ARREGLAR
+	{
 		if( p1==p || p2==p )
 		{
 			Personaje perEnc=this.getPersonaje(p);
@@ -57,13 +92,13 @@ public class Controlador
 		}
 		
 		dataPer.update(p);
-	}
+	}*/
 	
 	public void delete(Personaje p){
 		dataPer.delete(p);;
 	}
 	
-	public Personaje getPersonaje(Personaje p)
+	public Personaje getPersonaje(Personaje p)//no uso
 	{
 		/*
 		 * Personaje perEnc=null;
@@ -85,15 +120,7 @@ public Personaje buscaPersonaje(String nomb)
 		return p;
 	}
 
-public Personaje damePersonaje1(){
-System.out.println(p1.getNombre());
-	return this.p1;
-	
-}
 
-public Personaje damePersonaje2(){
-	return this.p2;
-}
 public void insertarPersonaje(Personaje pnew)throws ApplicationException
 	{
 		if(pnew.getNombre() != null)  //COMPLETAR IFS ANIDADOS
@@ -102,18 +129,8 @@ public void insertarPersonaje(Personaje pnew)throws ApplicationException
 		dataPer.add(pnew);
 		}
 		};
-	
 }
-/*	
- * public Personaje buscarPersonaje  (String nomb)
-	{
-		Personaje per =MyDataAcces1.getByNombre(nomb);
-		JOptionPane.showMessageDialog(null, "Muestro que encontro: " +per.getNombre()); 
-		//this.cargaNombre(nomb);
-		return per;
-		
-};
-*/
+
 	
 	
 	
