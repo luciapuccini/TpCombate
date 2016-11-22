@@ -38,38 +38,24 @@ public class Controlador
 	{
 	};
 	
-	/*public void add(Personaje p) throws ApplicationException {
-		dataPer.add(p);
-		
-		if(!personajes.contains(p)){
-			personajes.add(p);
-		} else {
-			throw new ApplicationException("La Persona ya existe");
-		}}
-	}*/
 	
 	public Personaje dameUno()
 	{
 	
 		Personaje p=this.getP1();
-		System.out.println("ctrl llega: "+ p.getNombre());
+	
 		
 		return p;
 	}
 	public Personaje dameDos()
 	{
 		Personaje p=this.getP2();
-		System.out.println("ctrl llega: "+ p.getNombre());
+		
 		
 		return p;
 	}
 	
-/*	public Personaje dameDos()
-	{
-		Personaje p=data.getP2();
-		System.out.println("ctrl llega: "+ p.getNombre());
-		return p;
-	}*/
+
 	
 
 /*	public void update(Personaje p) throws ApplicationException  ARREGLAR
@@ -123,11 +109,22 @@ public Personaje buscaPersonaje(String nomb)
 
 public void insertarPersonaje(Personaje pnew)throws ApplicationException
 	{
-		if(pnew.getNombre() != null)  //COMPLETAR IFS ANIDADOS
+		if(pnew.getNombre() != null) 
+			if(pnew.getDefensa() != 0)
+			{
+			  if(pnew.getEnergia() != 0)
+				{
+				if(pnew.getEvasion() != 0)
+				{
+				  if(pnew.getVida() !=0)	
+					{
+					  {	dataPer.add(pnew);	}
+											
+					}		
+				}	
+				}
+		    }
 			
-		{
-		dataPer.add(pnew);
-		}
 		};
 }
 

@@ -10,6 +10,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -31,8 +32,13 @@ public class Turno extends JFrame
 	private JTextField txtEnergiaDisponible2;
 	private JTextField txtP1;
 	private JTextField txtP2;
+	private JTextField txtTurno;
+//	private boolean turnoActual=true;
 	
+	Personaje p1;
+	Personaje p2;
 	Controlador ctrl;
+	
 
 	public Controlador getCtrl() 
 	{
@@ -43,9 +49,7 @@ public class Turno extends JFrame
 	{
 		this.ctrl = ctrl;
 	}
-
-	Personaje p1;
-	Personaje p2;
+	
 	
 	
 	public Personaje getP1()
@@ -131,25 +135,29 @@ public class Turno extends JFrame
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-/**	public Turno(Controlador c)
-*	{
-*		this.setCtrl(c);
-*		p1=c.dameUno();
-*		p2=c.dameDos();
-*		this.setP2(c.getP2());
-*		System.out.println("llego al turno: "+	c.getP1().getNombre());	
-*	} */
+	public void cuentaTurnos (boolean b) 
+	{
+		if (b)
+		{
+			txtTurno.setText("Jugador 1:" +p1.getNombre());
+		}
+		else
+		{
+			txtTurno.setText("Jugador 2:" +p2.getNombre());
+		}
+	};
+	
 	
 	public Turno(Controlador c) {
 		
 		this.setCtrl(c);
 		p1=c.dameUno();
 		p2=c.dameDos();
-		this.setP2(c.getP2());
-		System.out.println("llego al turno: "+	c.getP1().getNombre());
+		p1.setVidaOriginal(p1.getVida());
+		p2.setVidaOriginal(p2.getVida());
+		p1.setEnergiaOriginal(p1.getEnergia());
+		p2.setEnergiaOriginal(p2.getEnergia());
+	
 		//----------------------inicializo--------------------------------------
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -170,6 +178,9 @@ public class Turno extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				p1.atacar(Integer.parseInt(txtEnergia1.getText()), p2);
+				txtVidaActual1.setText(String.valueOf(p1.getVida()));
+				txtEnergiaDisponible1.setText(String.valueOf(p1.getEnergia()));
+				cuentaTurnos(false);
 			}
 		});
 		
@@ -178,7 +189,16 @@ public class Turno extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-			}
+				if(Integer.parseInt(txtEnergia1.getText())< 20)
+				{	
+					p1.defender(Integer.parseInt(txtEnergia1.getText()));
+					txtVidaActual2.setText(String.valueOf(p2.getVida()));
+					txtEnergiaDisponible2.setText(String.valueOf(p2.getEnergia()));
+					cuentaTurnos(false);
+				}
+				else{JOptionPane.showMessageDialog(null,"la energia no puede superar 20 puntos");}
+				
+				}
 		});
 		//-------------------juego p2-------------------------
 		JButton btnAtaque2 = new JButton("Ataque");
@@ -187,6 +207,8 @@ public class Turno extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				p2.atacar(Integer.parseInt(txtEnergia2.getText()), p1);
+				System.out.println("energia de 2  " +p2.getEnergia());
+				cuentaTurnos(true);
 			}
 		});
 		
@@ -195,7 +217,12 @@ public class Turno extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println(""+p1.getNombre());
+				if(Integer.parseInt(txtEnergia2.getText())< 20)
+				{	
+					p2.defender(Integer.parseInt(txtEnergia2.getText()));
+					cuentaTurnos(true);
+				}
+				else{JOptionPane.showMessageDialog(null,"la energia no puede superar 20 puntos");}
 			}
 		});
 //----------------------labels------------------------------------------------------------------------------
@@ -215,11 +242,7 @@ public class Turno extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				int a=Integer.parseInt(txtEnergia1.getText());
-				//actualiza energia
-	
-			//	controlaAtaque.ataque(a);
-				
+			
 			}
 		});
 		txtEnergia1.setColumns(10);
@@ -303,6 +326,17 @@ public class Turno extends JFrame
 		txtP2.setColumns(10);
 		txtP2.setText(p2.getNombre());
 		
+		JLabel lblTurno = new JLabel("Turno:");
+		
+		txtTurno = new JTextField();
+		
+		
+		txtTurno.setEditable(false);
+		txtTurno.setColumns(10);
+		
+		
+			
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -317,14 +351,6 @@ public class Turno extends JFrame
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblP1)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtP1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblVida1)
-									.addGap(18)
-									.addComponent(txtVidaActual1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblEnergia1)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addComponent(txtEnergiaDisponible1, 0, 0, Short.MAX_VALUE))
@@ -332,20 +358,29 @@ public class Turno extends JFrame
 									.addComponent(lblEnergiaAtaque1)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(txtEnergia1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGap(53)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+									.addPreferredGap(ComponentPlacement.RELATED))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblP2)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtP2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(50))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblP1)
+										.addComponent(lblVida1))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGap(18)
+											.addComponent(txtVidaActual1, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+											.addGap(35))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(txtP1)))
+									.addGap(9))
+								.addComponent(lblTurno, Alignment.TRAILING))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(53)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(lblEnergiaAtaque2)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtEnergia2, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+											.addComponent(txtEnergia2, GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(btnAtaque2)
 											.addGap(18)
@@ -353,24 +388,39 @@ public class Turno extends JFrame
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 												.addComponent(lblVida2)
-												.addComponent(lblEnergia2))
-											.addGap(18)
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(txtEnergiaDisponible2, 0, 0, Short.MAX_VALUE)
-												.addComponent(txtVidaActual2, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))))
-									.addGap(77)))
-							.addGap(53))))
+												.addComponent(lblEnergia2)
+												.addComponent(lblP2))
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addGap(18)
+													.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+														.addComponent(txtEnergiaDisponible2, 0, 0, Short.MAX_VALUE)
+														.addGroup(gl_contentPane.createSequentialGroup()
+															.addGap(29)
+															.addComponent(txtVidaActual2, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))))
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(txtP2)))))
+									.addGap(20))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(0)
+									.addComponent(txtTurno, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+									.addGap(168))))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addGap(5)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTurno)
+						.addComponent(txtTurno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblP1)
 						.addComponent(txtP1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblP2)
 						.addComponent(txtP2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(44)
+					.addGap(24)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVida2)
 						.addComponent(txtVidaActual2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -389,7 +439,7 @@ public class Turno extends JFrame
 						.addComponent(lblEnergiaAtaque2)
 						.addComponent(txtEnergia1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtEnergia2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnDefensa1)
 						.addComponent(btnAtaque1)

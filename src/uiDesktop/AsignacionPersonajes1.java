@@ -1,30 +1,28 @@
 package uiDesktop;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import datos.MyDataAccess;
-import entidades.Personaje;
-import logica.Controlador;
-import utils.ApplicationException;
+import java.awt.Font;
+//import javax.swing.UIManager;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import java.awt.Color;
-//import javax.swing.UIManager;
-import java.awt.SystemColor;
-import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+
+import entidades.Personaje;
+import logica.Controlador;
+import utils.ApplicationException;
 
 @SuppressWarnings("serial")
 public class AsignacionPersonajes1 extends JFrame 
@@ -40,7 +38,7 @@ public class AsignacionPersonajes1 extends JFrame
 	private JTextField txtNombre;
 	Personaje p =new Personaje();
 	/////////////////////////////////////////////////////////////////
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -61,9 +59,8 @@ public class AsignacionPersonajes1 extends JFrame
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	int variable=0;
+	
 	public AsignacionPersonajes1()
 	{
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,6 +82,9 @@ public class AsignacionPersonajes1 extends JFrame
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		
+		
+		
+		 
 		txtPuntos = new JTextField();
 		txtPuntos.setEditable(true);
 		txtPuntos.setText("200");
@@ -95,7 +95,11 @@ public class AsignacionPersonajes1 extends JFrame
 			}
 		});
 		txtPuntos.setColumns(10);
-		
+//		
+  variable=Integer.parseInt(txtPuntos.getText());
+  
+   System.out.println("var  "+variable);
+//		 
 		txtEvasion = new JTextField();
 		txtEvasion.addActionListener(new ActionListener() 
 		{
@@ -104,6 +108,9 @@ public class AsignacionPersonajes1 extends JFrame
 				
 				int a=Integer.parseInt(txtEvasion.getText());
 				p.setEvasion(a);
+				int b= variable-a;
+				txtPuntos.setText(String.valueOf(b));
+				variable=variable-a;
 				
 			}	
 		});
@@ -117,6 +124,8 @@ public class AsignacionPersonajes1 extends JFrame
 			int a=Integer.parseInt(txtEnergia.getText());
 			p.setEnergia(a);
 			
+			txtPuntos.setText(String.valueOf(variable-a));
+			variable=variable-a;
 			}
 		});
 		txtEnergia.setColumns(10);
@@ -129,6 +138,8 @@ public class AsignacionPersonajes1 extends JFrame
 				int a=Integer.parseInt(txtVida.getText());
 				p.setVida(a);
 				
+				txtPuntos.setText(String.valueOf(variable-a));
+				variable=variable-a;
 			}
 		});
 		txtVida.setColumns(10);
@@ -141,6 +152,8 @@ public class AsignacionPersonajes1 extends JFrame
 				int a=Integer.parseInt(txtDefensa.getText());
 				p.setDefensa(a);
 				
+				txtPuntos.setText(String.valueOf(variable-a));
+				variable=variable-a;
 			}
 			
 		});
