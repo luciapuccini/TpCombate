@@ -178,8 +178,9 @@ public class Turno extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				p1.atacar(Integer.parseInt(txtEnergia1.getText()), p2);
-				txtVidaActual1.setText(String.valueOf(p1.getVida()));
-				txtEnergiaDisponible1.setText(String.valueOf(p1.getEnergia()));
+					txtEnergiaDisponible1.setText(String.valueOf(p1.getEnergia()));
+					txtVidaActual2.setText(String.valueOf(p2.getVida()));
+
 				cuentaTurnos(false);
 			}
 		});
@@ -192,8 +193,8 @@ public class Turno extends JFrame
 				if(Integer.parseInt(txtEnergia1.getText())<= 20)
 				{	
 					p1.defender(Integer.parseInt(txtEnergia1.getText()));
-					txtVidaActual2.setText(String.valueOf(p2.getVida()));
-					txtEnergiaDisponible2.setText(String.valueOf(p2.getEnergia()));
+					txtVidaActual1.setText(String.valueOf(p1.getVida()));
+					txtEnergiaDisponible1.setText(String.valueOf(p1.getEnergia()));
 					cuentaTurnos(false);
 				}
 				else{JOptionPane.showMessageDialog(null,"la energia no puede superar 20 puntos");}
@@ -207,7 +208,8 @@ public class Turno extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				p2.atacar(Integer.parseInt(txtEnergia2.getText()), p1);
-				System.out.println("energia de 2  " +p2.getEnergia());
+					txtVidaActual1.setText(String.valueOf(p1.getVida()));
+					txtEnergiaDisponible2.setText(String.valueOf(p2.getEnergia()));
 				cuentaTurnos(true);
 			}
 		});
@@ -220,6 +222,8 @@ public class Turno extends JFrame
 				if(Integer.parseInt(txtEnergia2.getText())<= 20)
 				{	
 					p2.defender(Integer.parseInt(txtEnergia2.getText()));
+					txtVidaActual2.setText(String.valueOf(p2.getVida()));
+					txtEnergiaDisponible2.setText(String.valueOf(p2.getEnergia()));
 					cuentaTurnos(true);
 				}
 				else{JOptionPane.showMessageDialog(null,"la energia no puede superar 20 puntos");}
