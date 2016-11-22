@@ -98,7 +98,6 @@ public class AsignacionPersonajes1 extends JFrame
 //		
   variable=Integer.parseInt(txtPuntos.getText());
   
-   System.out.println("var  "+variable);
 //		 
 		txtEvasion = new JTextField();
 		txtEvasion.addActionListener(new ActionListener() 

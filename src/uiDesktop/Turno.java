@@ -189,7 +189,7 @@ public class Turno extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(Integer.parseInt(txtEnergia1.getText())< 20)
+				if(Integer.parseInt(txtEnergia1.getText())<= 20)
 				{	
 					p1.defender(Integer.parseInt(txtEnergia1.getText()));
 					txtVidaActual2.setText(String.valueOf(p2.getVida()));
@@ -217,7 +217,7 @@ public class Turno extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(Integer.parseInt(txtEnergia2.getText())< 20)
+				if(Integer.parseInt(txtEnergia2.getText())<= 20)
 				{	
 					p2.defender(Integer.parseInt(txtEnergia2.getText()));
 					cuentaTurnos(true);

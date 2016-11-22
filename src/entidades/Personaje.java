@@ -4,6 +4,8 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import datos.DataPersonaje;
+
 public class Personaje 
 	{
 //-----------Attributes--------------//
@@ -79,10 +81,10 @@ public class Personaje
 			this.setVida(this.getVida()-valorAtaque);
 		
 			
-			if(this.getVida() == 0)
+			if(this.getVida() <= 0)
 			{ System.out.println("this.vida  "+this.getVida());
 				JOptionPane.showMessageDialog(null, this.getNombre()+"PERDIO");
-			//	System.exit(0);
+				
 			}
 		}
 		else
@@ -95,6 +97,8 @@ public class Personaje
 		this.setEnergia(this.getEnergia()-valorAtaque);
 		
 		pAtacado.recibirAtaque(valorAtaque);
+		if (pAtacado.getVida()<=0)
+		{this.gano();}
 		return 0;
 	};
 	
@@ -107,6 +111,12 @@ public class Personaje
 		{this.setEnergia(this.getEnergia() + energiaARecuperar);}
 		if(this.getVida() + vidaARecuperar<vidaOriginal)
 		{this.setVida(this.getVida() + vidaARecuperar);}
+	};
+	
+	DataPersonaje data = new DataPersonaje();
+	public void gano()
+	{
+		
 	};
 	
 	}//fin personaje

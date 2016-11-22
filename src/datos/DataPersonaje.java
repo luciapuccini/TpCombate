@@ -113,7 +113,7 @@ public class DataPersonaje {
 		
 		try {
 			stmt= MyDataAccess.getInstancia().getConn().prepareStatement(
-					"update Personajes set  nombre=?, energia=?, vida=?, defensa=?, evasion=?, puntos_totales=?"+//!!!p_t?
+					"update Personajes set  nombre=?, energia=?, vida=?, defensa=?, evasion=?, puntos_totales=?"+
 					" where id=?");
 			
 			stmt.setString(1,p.getNombre());
