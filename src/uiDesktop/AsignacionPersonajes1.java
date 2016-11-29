@@ -179,7 +179,7 @@ public class AsignacionPersonajes1 extends JFrame
 				int opc =JOptionPane.showConfirmDialog(null, "va a agregar un nuevo registro,¿Esta seguro?", null, 2);
 				if (opc==0)
 				{
-				//faltaria validar que los campos no esten vacios en controlador...
+				
 				System.out.println("insertando nuevo registro...");
 				Controlador ctrl = new Controlador();
 				try {

@@ -238,7 +238,7 @@ public class DataPersonaje {
 				stmt.setInt(4,p.getDefensa());
 				stmt.setInt(5, p.getEvasion());
 				stmt.setInt(6,p.getPuntos());
-				
+				stmt.setString(7,p.getNombre());
 				
 				stmt.execute();
 				

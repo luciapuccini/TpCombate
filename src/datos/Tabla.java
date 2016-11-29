@@ -184,6 +184,16 @@ public class Tabla extends JFrame
         			
         	}
         });
+        
+        JButton btnModificar = new JButton("Modificar");
+        btnModificar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) 
+        	{
+        		modifica m=new modifica(p1,ctrlBusca);
+        		m.setVisible(true);
+        		
+        	}
+        });
         GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(
         	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -194,7 +204,8 @@ public class Tabla extends JFrame
         				.addComponent(txtP1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(btnPersonaje2)
         				.addComponent(txtP2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(button))
+        				.addComponent(button)
+        				.addComponent(btnModificar))
         			.addContainerGap(37, Short.MAX_VALUE))
         );
         gl_panel.setVerticalGroup(
@@ -210,7 +221,9 @@ public class Tabla extends JFrame
         			.addComponent(txtP2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(59)
         			.addComponent(button)
-        			.addContainerGap(179, Short.MAX_VALUE))
+        			.addGap(18)
+        			.addComponent(btnModificar)
+        			.addContainerGap(138, Short.MAX_VALUE))
         );
         panel.setLayout(gl_panel);
         this.pack();
@@ -244,3 +257,4 @@ public class Tabla extends JFrame
     }
 
 }
+

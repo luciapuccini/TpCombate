@@ -80,6 +80,29 @@ public class Controlador
 		dataPer.update(p);
 	};
 	
+	
+	public void modifica(Personaje p) throws ApplicationException  
+	{
+		if( p1==p || p2==p )
+		{
+			Personaje perEnc=this.getPersonaje(p);
+			
+			perEnc.setNombre(p.getNombre());
+			perEnc.setVida(p.getVida());
+			perEnc.setDefensa(p.getDefensa());
+			perEnc.setEnergia(p.getEnergia());
+			perEnc.setPuntos(p.getPuntos());
+			perEnc.setEvasion(p.getEvasion());
+			
+		}
+		else
+		{
+			throw new ApplicationException("El Personaje no existe");
+		}
+		
+		dataPer.Modifica(p);
+	};
+	
 	public void delete(Personaje p){
 		dataPer.delete(p);;
 	};
