@@ -181,6 +181,7 @@ public class Tabla extends JFrame
         			Turno t= new Turno(ctrlBusca);
         			t.setVisible(true);
         			
+        			
         	}
         });
         GroupLayout gl_panel = new GroupLayout(panel);

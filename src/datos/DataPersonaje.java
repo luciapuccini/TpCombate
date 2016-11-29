@@ -113,15 +113,12 @@ public class DataPersonaje {
 		
 		try {
 			stmt= MyDataAccess.getInstancia().getConn().prepareStatement(
-					"update Personajes set  nombre=?, energia=?, vida=?, defensa=?, evasion=?, puntos_totales=?"+
-					" where id=?");
+					"update Personajes set  nombre=?, puntos_totales=?"+
+					" where nombre=?");
 			
 			stmt.setString(1,p.getNombre());
-			stmt.setInt(2,p.getEnergia());
-			stmt.setInt(3,p.getVida());
-			stmt.setInt(4,p.getDefensa());
-			stmt.setInt(5,p.getEvasion());
-			stmt.setInt(6,p.getPuntos());
+			stmt.setInt(2,p.getPuntos());
+			stmt.setString(3,p.getNombre());
 			stmt.execute();
 			
 			
@@ -226,6 +223,50 @@ public class DataPersonaje {
 			
 			return p;
 
+		}
+		public void Modifica(Personaje p){
+			PreparedStatement stmt=null;
+			
+			try {
+				stmt= MyDataAccess.getInstancia().getConn().prepareStatement(
+						"update Personajes set  nombre=?,energia=?,vida=?,defensa=?,evasion=?, puntos_totales=?"+
+						" where nombre=?");
+				
+				stmt.setString(1,p.getNombre());
+				stmt.setInt(2,p.getEnergia());
+				stmt.setInt(3,p.getVida());
+				stmt.setInt(4,p.getDefensa());
+				stmt.setInt(5, p.getEvasion());
+				stmt.setInt(6,p.getPuntos());
+				
+				
+				stmt.execute();
+				
+				
+				
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Hubo un problema al intentar conectarse a la base de datos");
+				e.printStackTrace();
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(stmt!=null)stmt.close();
+					MyDataAccess.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Hubo un problema al intentar conectarse a la base de datos");
+					e.printStackTrace();
+				} catch (ApplicationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	

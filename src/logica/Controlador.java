@@ -58,7 +58,7 @@ public class Controlador
 
 	
 
-/*	public void update(Personaje p) throws ApplicationException  ARREGLAR
+	public void update(Personaje p) throws ApplicationException  
 	{
 		if( p1==p || p2==p )
 		{
@@ -78,11 +78,11 @@ public class Controlador
 		}
 		
 		dataPer.update(p);
-	}*/
+	};
 	
 	public void delete(Personaje p){
 		dataPer.delete(p);;
-	}
+	};
 	
 	public Personaje getPersonaje(Personaje p)//no uso
 	{

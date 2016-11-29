@@ -5,6 +5,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import datos.DataPersonaje;
+import logica.Controlador;
+import utils.ApplicationException;
 
 public class Personaje 
 	{
@@ -17,7 +19,15 @@ public class Personaje
 	 String nombre;
 	 int energiaOriginal;
 	 int vidaOriginal;
-//----------getters y setters----------------------//	
+	 Controlador ctrl;
+//----------getters y setters----------------------//
+	 public  Controlador getCtrl() {
+			return ctrl;
+		}
+		public  void setCtrl(Controlador c) {
+			this.ctrl = c;
+		}
+	 
 	public  int getEnergia() {
 		return energia;
 	}
@@ -82,8 +92,8 @@ public class Personaje
 		
 			
 			if(this.getVida() <= 0)
-			{ System.out.println("this.vida  "+this.getVida());
-				JOptionPane.showMessageDialog(null, this.getNombre()+"PERDIO");
+			{ 
+				JOptionPane.showMessageDialog(null, this.getNombre()+"  PERDIO");
 				
 			}
 		}
@@ -92,31 +102,60 @@ public class Personaje
 			JOptionPane.showMessageDialog(null, "SE EVADIO EL ATAQUE");
 		}
 	};
-	public int atacar(int valorAtaque,Personaje pAtacado)
+	public int atacar(int valorAtaque,Personaje pAtacado,Controlador c)
+	{
+		if(valorAtaque <= energia)
 	{
 		this.setEnergia(this.getEnergia()-valorAtaque);
-		
 		pAtacado.recibirAtaque(valorAtaque);
 		if (pAtacado.getVida()<=0)
-		{this.gano();}
+		
+		{
+			setCtrl(c);
+			this.Actualizacion(c);
+			
+		}
+		return 1;
+	}else
+	{JOptionPane.showMessageDialog(null, "No tiene suficiente energía");}
 		return 0;
 	};
 	
-	public void defender(int defensa)
+	public int defender(int defensa)
 	{
-		int energiaARecuperar = energiaOriginal * defensa / 100 ;
+		if(defensa <= energia)
+		{
+			int energiaARecuperar = energiaOriginal * defensa / 100 ;
+		
 		int vidaARecuperar = vidaOriginal * defensa / 250 ;
 		
 		if(this.getEnergia() + energiaARecuperar < energiaOriginal)
 		{this.setEnergia(this.getEnergia() + energiaARecuperar);}
 		if(this.getVida() + vidaARecuperar<vidaOriginal)
 		{this.setVida(this.getVida() + vidaARecuperar);}
+		return 1;
+		}else
+		{
+			JOptionPane.showMessageDialog(null, "No tiene suficiente energia");
+			return 0;
+		}
 	};
 	
 	DataPersonaje data = new DataPersonaje();
-	public void gano()
+
+	
+	public void Actualizacion(Controlador c)
 	{
+		setCtrl(c);
+		this.puntos=puntos+10;
+	System.out.println("llega " +puntos);
+	try {
+		ctrl.update(this);
+		System.exit(0);
+	} catch (ApplicationException e) {
 		
-	};
+		e.printStackTrace();
+	}
+	}
 	
 	}//fin personaje

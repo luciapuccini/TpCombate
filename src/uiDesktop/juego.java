@@ -93,6 +93,8 @@ public class juego extends JFrame
 			{
 				
 				frame21.main(null);
+			//	Turno t= new Turno(ctrlBusca);
+    			//t.setVisible(true);
 				
 			}
 		});
