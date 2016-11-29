@@ -1,25 +1,24 @@
 package datos;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import entidades.Personaje;
 import logica.Controlador;
 import utils.ApplicationException;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+@SuppressWarnings("serial")
 public class modifica extends JFrame {
 	
 	private Controlador ctrl;
@@ -65,7 +64,7 @@ public class modifica extends JFrame {
 		this.p=p;
 		this.ctrl=ctrl;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -141,21 +140,27 @@ public class modifica extends JFrame {
 		txtPtosDisp.setText(String.valueOf(p.getPuntos()));
 		JTextArea txtrNombre = new JTextArea();
 		txtrNombre.setText("Nombre");
+		txtrNombre.setEditable(false);
 		
 		JTextArea txtrEnergia = new JTextArea();
 		txtrEnergia.setText("Energia");
+		txtrEnergia.setEditable(false);
 		
 		JTextArea txtrVida = new JTextArea();
 		txtrVida.setText("Vida");
+		txtrVida.setEditable(false);
 		
 		JTextArea txtrDefensa = new JTextArea();
 		txtrDefensa.setText("Defensa");
+		txtrDefensa.setEditable(false);
 		
 		JTextArea txtrEvasion = new JTextArea();
 		txtrEvasion.setText("Evasion");
+		txtrEvasion.setEditable(false);
 		
 		JTextArea txtrPtosDisp = new JTextArea();
 		txtrPtosDisp.setText("Ptos Disp");
+		txtrPtosDisp.setEditable(false);
 		
 		
 		JButton btnAceptar = new JButton("Aceptar");

@@ -33,7 +33,7 @@ public class Turno extends JFrame
 	private JTextField txtP1;
 	private JTextField txtP2;
 	private JTextField txtTurno;
-//	private boolean turnoActual=true;
+
 	
 	Personaje p1;
 	Personaje p2;
@@ -166,7 +166,7 @@ public class Turno extends JFrame
 		//----------------------inicializo--------------------------------------
 		if(p1.getVida()>0 || p2.getVida()>0){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

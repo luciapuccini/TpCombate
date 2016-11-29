@@ -160,8 +160,6 @@ public class Tabla extends JFrame
         	p2=ctrlBusca.buscaPersonaje(nombrePersonaje);  //this.setP2(p2);
         	ctrlBusca.setP2(p2);
     		JOptionPane.showMessageDialog(null, "encontre: "+p2.getNombre());
-    		
-		
         	
         	}
         });
@@ -185,7 +183,7 @@ public class Tabla extends JFrame
         	}
         });
         
-        JButton btnModificar = new JButton("Modificar");
+        JButton btnModificar = new JButton("MODIFICAR");
         btnModificar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) 
         	{
