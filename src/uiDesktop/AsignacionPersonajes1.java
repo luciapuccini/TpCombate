@@ -106,10 +106,12 @@ public class AsignacionPersonajes1 extends JFrame
 			{
 				
 				int a=Integer.parseInt(txtEvasion.getText());
+				if (variable>a){
 				p.setEvasion(a);
 				int b= variable-a;
 				txtPuntos.setText(String.valueOf(b));
-				variable=variable-a;
+				variable=variable-a;}
+				else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
 				
 			}	
 		});
@@ -121,10 +123,13 @@ public class AsignacionPersonajes1 extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{	
 			int a=Integer.parseInt(txtEnergia.getText());
+			if (variable>a){
 			p.setEnergia(a);
 			
 			txtPuntos.setText(String.valueOf(variable-a));
-			variable=variable-a;
+			variable=variable-a;}
+			else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
+
 			}
 		});
 		txtEnergia.setColumns(10);
@@ -135,10 +140,14 @@ public class AsignacionPersonajes1 extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				int a=Integer.parseInt(txtVida.getText());
+				if(variable>a){
 				p.setVida(a);
 				
+				
 				txtPuntos.setText(String.valueOf(variable-a));
-				variable=variable-a;
+				variable=variable-a;}
+				else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
+
 			}
 		});
 		txtVida.setColumns(10);
@@ -149,10 +158,14 @@ public class AsignacionPersonajes1 extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				int a=Integer.parseInt(txtDefensa.getText());
+				if (variable>a)
+				{
 				p.setDefensa(a);
 				
 				txtPuntos.setText(String.valueOf(variable-a));
-				variable=variable-a;
+				variable=variable-a;}
+				else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
+
 			}
 			
 		});

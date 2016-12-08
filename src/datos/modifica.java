@@ -8,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -85,10 +86,15 @@ public class modifica extends JFrame {
 				int a=p.getEnergia();
 				String st=txtEnergia.getText();
 				int b=Integer.parseInt(st);
+				String str=txtPtosDisp.getText();
+				int d=Integer.parseInt(str);
+				if(d>a){
 				int c=a+b;
 				p.setEnergia(c);
-				ActualizaPtos(b);
-				
+				ActualizaPtos(b);}
+				else {JOptionPane.showInternalMessageDialog(null, "Puntos insuficientes");
+					
+				}
 			}
 		});
 		txtEnergia.setColumns(10);
@@ -98,10 +104,14 @@ public class modifica extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int a=p.getVida();
 				String st=txtVida.getText();
+				
 				int b=Integer.parseInt(st);
+				String str=txtPtosDisp.getText();
+				int d=Integer.parseInt(str);
+				if(d>b){
 				int c=a+b;
 				p.setVida(c);
-				ActualizaPtos(b);
+				ActualizaPtos(b);}
 			}
 		});
 		txtVida.setColumns(10);
@@ -112,9 +122,12 @@ public class modifica extends JFrame {
 				int a=p.getDefensa();
 				String st=txtDefensa.getText();
 				int b=Integer.parseInt(st);
+				String str=txtPtosDisp.getText();
+				int d=Integer.parseInt(str);
+				if(d>b){
 				int c=a+b;
 				p.setDefensa(c);
-				ActualizaPtos(b);
+				ActualizaPtos(b);}
 			}
 		});
 		txtDefensa.setColumns(10);
