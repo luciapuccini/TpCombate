@@ -38,6 +38,15 @@ public class AsignacionPersonajes1 extends JFrame
 	private JTextField txtNombre;
 	Personaje p =new Personaje();
 	/////////////////////////////////////////////////////////////////
+	public void ActualizaPtos(int b)
+	{
+			
+					
+			String str=String.valueOf(b);
+			p.setPuntos(b);
+			txtPuntos.setText(str);
+			
+	}
 	
 	/**
 	 * Launch the application.
@@ -88,13 +97,9 @@ public class AsignacionPersonajes1 extends JFrame
 		txtPuntos = new JTextField();
 		txtPuntos.setEditable(true);
 		txtPuntos.setText("200");
-		txtPuntos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				p.setPuntos(200);
-			}
-		});
+		
 		txtPuntos.setColumns(10);
+		
 //		
   variable=Integer.parseInt(txtPuntos.getText());
   
@@ -106,11 +111,12 @@ public class AsignacionPersonajes1 extends JFrame
 			{
 				
 				int a=Integer.parseInt(txtEvasion.getText());
-				if (variable>a){
+				if (variable>=a){
 				p.setEvasion(a);
 				int b= variable-a;
 				txtPuntos.setText(String.valueOf(b));
-				variable=variable-a;}
+				variable=variable-a;
+				ActualizaPtos(variable);}
 				else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
 				
 			}	
@@ -123,11 +129,12 @@ public class AsignacionPersonajes1 extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{	
 			int a=Integer.parseInt(txtEnergia.getText());
-			if (variable>a){
+			if (variable>=a){
 			p.setEnergia(a);
 			
 			txtPuntos.setText(String.valueOf(variable-a));
-			variable=variable-a;}
+			variable=variable-a;
+			ActualizaPtos(variable);}
 			else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
 
 			}
@@ -140,12 +147,13 @@ public class AsignacionPersonajes1 extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				int a=Integer.parseInt(txtVida.getText());
-				if(variable>a){
+				if(variable>=a){
 				p.setVida(a);
 				
 				
 				txtPuntos.setText(String.valueOf(variable-a));
-				variable=variable-a;}
+				variable=variable-a;
+				ActualizaPtos(variable);}
 				else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
 
 			}
@@ -158,12 +166,13 @@ public class AsignacionPersonajes1 extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				int a=Integer.parseInt(txtDefensa.getText());
-				if (variable>a)
+				if (variable>=a)
 				{
 				p.setDefensa(a);
 				
 				txtPuntos.setText(String.valueOf(variable-a));
-				variable=variable-a;}
+				variable=variable-a;
+				ActualizaPtos(variable);}
 				else{JOptionPane.showMessageDialog(null, "Puntos Insuficientes");}
 
 			}

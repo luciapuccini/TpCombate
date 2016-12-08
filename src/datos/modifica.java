@@ -59,6 +59,7 @@ public class modifica extends JFrame {
 			int c=a-b;
 			str=String.valueOf(c);
 			txtPtosDisp.setText(str);
+			p.setPuntos(c);
 	}
 	
 	public modifica(Personaje p, Controlador ctrl) {
@@ -88,11 +89,11 @@ public class modifica extends JFrame {
 				int b=Integer.parseInt(st);
 				String str=txtPtosDisp.getText();
 				int d=Integer.parseInt(str);
-				if(d>a){
+				if(d>=b){
 				int c=a+b;
 				p.setEnergia(c);
 				ActualizaPtos(b);}
-				else {JOptionPane.showInternalMessageDialog(null, "Puntos insuficientes");
+				else {JOptionPane.showMessageDialog(null, "Puntos insuficientes");
 					
 				}
 			}
@@ -108,10 +109,11 @@ public class modifica extends JFrame {
 				int b=Integer.parseInt(st);
 				String str=txtPtosDisp.getText();
 				int d=Integer.parseInt(str);
-				if(d>b){
+				if(d>=b){
 				int c=a+b;
 				p.setVida(c);
 				ActualizaPtos(b);}
+				else {JOptionPane.showMessageDialog(null, "Puntos insuficientes");}
 			}
 		});
 		txtVida.setColumns(10);
@@ -124,10 +126,11 @@ public class modifica extends JFrame {
 				int b=Integer.parseInt(st);
 				String str=txtPtosDisp.getText();
 				int d=Integer.parseInt(str);
-				if(d>b){
+				if(d>=b){
 				int c=a+b;
 				p.setDefensa(c);
 				ActualizaPtos(b);}
+				else {JOptionPane.showMessageDialog(null, "Puntos insuficientes");}
 			}
 		});
 		txtDefensa.setColumns(10);
@@ -138,9 +141,13 @@ public class modifica extends JFrame {
 				int a=p.getEvasion();
 				String st=txtEvasion.getText();
 				int b=Integer.parseInt(st);
+				String str=txtPtosDisp.getText();
+				int d=Integer.parseInt(str);
+				if(d>=b){
 				int c=a+b;
 				p.setEvasion(c);
-				ActualizaPtos(b);
+				ActualizaPtos(b);}
+				else {JOptionPane.showMessageDialog(null, "Puntos insuficientes");}
 				
 				
 			}
